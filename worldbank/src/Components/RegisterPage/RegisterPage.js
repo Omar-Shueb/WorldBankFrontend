@@ -35,47 +35,56 @@ class RegisterPage extends React.Component {
     }
   };
 
+  onLogInClick = () => {
+    this.props.history.replace("/login");
+  };
+
   getRegisterForm = () => {
     return (
-      <form onSubmit={this.onFormSubmit}>
-        <div>
-          <TextField
-            id="usernameInput"
-            label="Username"
-            variant="outlined"
-            margin="normal"
-            onChange={this.onInputChange}
-            required
-          />
-        </div>
-        <div>
-          <TextField
-            id="passwordInput"
-            label="Password"
-            variant="outlined"
-            margin="normal"
-            type="password"
-            onChange={this.onInputChange}
-            required
-          />
-        </div>
-        <div>
-          <TextField
-            id="confirmInput"
-            label="Confirm Password"
-            variant="outlined"
-            margin="normal"
-            type="password"
-            onChange={this.onInputChange}
-            required
-          />
-        </div>
-        <div>
-          <Button type="submit" variant="outlined">
-            Submit
-          </Button>
-        </div>
-      </form>
+      <>
+        <form onSubmit={this.onFormSubmit}>
+          <div>
+            <TextField
+              id="usernameInput"
+              label="Username"
+              variant="outlined"
+              margin="normal"
+              onChange={this.onInputChange}
+              required
+            />
+          </div>
+          <div>
+            <TextField
+              id="passwordInput"
+              label="Password"
+              variant="outlined"
+              margin="normal"
+              type="password"
+              onChange={this.onInputChange}
+              required
+            />
+          </div>
+          <div>
+            <TextField
+              id="confirmInput"
+              label="Confirm Password"
+              variant="outlined"
+              margin="normal"
+              type="password"
+              onChange={this.onInputChange}
+              required
+            />
+          </div>
+          <div>
+            <Button type="submit" variant="outlined">
+              Submit
+            </Button>
+          </div>
+        </form>
+        <Button variant="text" onClick={this.onLogInClick}>
+          Log In
+        </Button>
+      </>
     );
   };
 
