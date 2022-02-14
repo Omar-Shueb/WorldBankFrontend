@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { TextField, Button } from "@mui/material";
 import Networking from "../Networking";
 
@@ -21,14 +22,17 @@ class RegisterPage extends React.Component {
     this.setState({ [event.target.id]: event.target.value });
   };
 
-  onFormSubmit = (event) => {
+  onFormSubmit = async (event) => {
     event.preventDefault();
-    this.state.passwordInput !== this.state.confirmInput
-      ? this.setState({ error: "Passwords don't match!" })
-      : this.networking.postNewUser(
-          this.state.usernameInput,
-          this.state.passwordInput
-        );
+    if (this.state.passwordInput !== this.state.confirmInput) {
+      this.setState({ error: "Passwords don't match!" });
+    } else {
+      await this.networking.postNewUser(
+        this.state.usernameInput,
+        this.state.passwordInput
+      );
+      this.props.history.replace("/login");
+    }
   };
 
   getRegisterForm = () => {
@@ -80,4 +84,4 @@ class RegisterPage extends React.Component {
   }
 }
 
-export default RegisterPage;
+export default withRouter(RegisterPage);
