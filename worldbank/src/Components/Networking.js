@@ -27,7 +27,7 @@ class Networking {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: username,
+        username: username,
         password: password,
       }),
     });
