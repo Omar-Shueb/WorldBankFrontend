@@ -19,8 +19,8 @@ class Networking {
     return json;
   };
 
-  postNewUser = async (username, password, confirm) => {
-    let response = await fetch(`${url}/createUser`, {
+  postNewUser = async (username, password) => {
+    let response = await fetch(`${url}/createaccount`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -29,7 +29,6 @@ class Networking {
       body: JSON.stringify({
         email: username,
         password: password,
-        passwordConfirm: confirm,
       }),
     });
     const json = await response.json();
