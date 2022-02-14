@@ -1,12 +1,15 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Networking from "../Networking";
 
 class LogInPage extends React.Component {
   state = {
     usernameInput: "",
     passwordInput: "",
+    error: "",
+    showPassword: false,
   };
   networking = new Networking();
 
@@ -16,15 +19,25 @@ class LogInPage extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    //// networking
-    this.networking.postLogIn(
+
+    this.setState({ error: "" });
+
+    let json = this.networking.postLogIn(
       this.state.usernameInput,
       this.state.passwordInput
     );
+
+    json.success === true
+      ? console.log("Redirect to page")
+      : this.setState({ error: json.error });
   };
 
   onRegisterClick = (event) => {
     this.props.history.replace("/register");
+  };
+
+  onShowPasswordClick = () => {
+    this.setState({ showPassword: !this.state.showPassword });
   };
 
   getLogInForm = () => {
@@ -38,6 +51,7 @@ class LogInPage extends React.Component {
               variant="outlined"
               margin="normal"
               onChange={this.onChange}
+              error={this.state.error.length > 0}
               required
             />
           </div>
@@ -47,8 +61,27 @@ class LogInPage extends React.Component {
               label="Password"
               variant="outlined"
               margin="normal"
-              type="password"
+              type={this.state.showPassword ? "text" : "password"}
               onChange={this.onChange}
+              error={this.state.error.length > 0}
+              helperText={this.state.error}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      edge="end"
+                      onClick={this.onShowPasswordClick}
+                    >
+                      {this.state.showPassword ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               required
             />
           </div>

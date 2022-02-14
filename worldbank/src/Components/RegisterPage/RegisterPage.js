@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Networking from "../Networking";
 
 class RegisterPage extends React.Component {
@@ -9,17 +10,17 @@ class RegisterPage extends React.Component {
     passwordInput: "",
     confirmInput: "",
     error: "",
+    showPassword: false,
   };
   networking = new Networking();
 
-  onInputChange = (event) => {
-    if (
-      event.target.id === "passwordInput" ||
-      event.target.id === "confirmInput"
-    ) {
+  onInputChange = async (event) => {
+    await this.setState({ [event.target.id]: event.target.value });
+    if (this.state.passwordInput !== this.state.confirmInput) {
+      this.setState({ error: "Passwords don't match!" });
+    } else {
       this.setState({ error: "" });
     }
-    this.setState({ [event.target.id]: event.target.value });
   };
 
   onFormSubmit = async (event) => {
@@ -37,6 +38,10 @@ class RegisterPage extends React.Component {
 
   onLogInClick = () => {
     this.props.history.replace("/login");
+  };
+
+  onShowPasswordClick = () => {
+    this.setState({ showPassword: !this.state.showPassword });
   };
 
   getRegisterForm = () => {
@@ -59,8 +64,26 @@ class RegisterPage extends React.Component {
               label="Password"
               variant="outlined"
               margin="normal"
-              type="password"
+              type={this.state.showPassword ? "text" : "password"}
               onChange={this.onInputChange}
+              error={this.state.error.length > 0}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      edge="end"
+                      onClick={this.onShowPasswordClick}
+                    >
+                      {this.state.showPassword ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               required
             />
           </div>
@@ -70,8 +93,27 @@ class RegisterPage extends React.Component {
               label="Confirm Password"
               variant="outlined"
               margin="normal"
-              type="password"
+              type={this.state.showPassword ? "text" : "password"}
               onChange={this.onInputChange}
+              error={this.state.error.length > 0}
+              helperText={this.state.error}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      edge="end"
+                      onClick={this.onShowPasswordClick}
+                    >
+                      {this.state.showPassword ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               required
             />
           </div>
