@@ -28,7 +28,7 @@ class LogInPage extends React.Component {
     );
 
     json.success === true
-      ? console.log("Redirect to page")
+      ? this.props.history.replace("/search")
       : this.setState({ error: json.error });
   };
 
