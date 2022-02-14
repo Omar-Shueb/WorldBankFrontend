@@ -11,10 +11,7 @@ class RegisterPage extends React.Component {
   };
 
   onInputChange = (event) => {
-    if (
-      event.target.id === "passwordInput" ||
-      event.target.id === "confirmInput"
-    ) {
+    if (event.target.id === "passwordInput" || event.target.id === "confirmInput") {
       this.setState({ error: "" });
     }
     this.setState({ [event.target.id]: event.target.value });
@@ -27,10 +24,7 @@ class RegisterPage extends React.Component {
     } else {
       const networking = new Networking();
 
-      networking.postNewUser(
-        this.state.usernameInput,
-        this.state.passwordInput
-      );
+      networking.postNewUser(this.state.usernameInput, this.state.passwordInput);
     }
   };
 
