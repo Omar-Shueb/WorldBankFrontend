@@ -51,7 +51,7 @@ class LogInPage extends React.Component {
   };
 
   render() {
-    return <>{this.getRegisterForm()}</>;
+    return <>{this.getLogInForm()}</>;
   }
 }
 
