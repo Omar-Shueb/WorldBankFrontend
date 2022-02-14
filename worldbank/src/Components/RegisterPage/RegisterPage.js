@@ -9,9 +9,13 @@ class RegisterPage extends React.Component {
     confirmInput: "",
     error: "",
   };
+  networking = new Networking();
 
   onInputChange = (event) => {
-    if (event.target.id === "passwordInput" || event.target.id === "confirmInput") {
+    if (
+      event.target.id === "passwordInput" ||
+      event.target.id === "confirmInput"
+    ) {
       this.setState({ error: "" });
     }
     this.setState({ [event.target.id]: event.target.value });
@@ -19,13 +23,12 @@ class RegisterPage extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    if (this.state.passwordInput !== this.state.confirmInput) {
-      this.setState({ error: "Passwords don't match!" });
-    } else {
-      const networking = new Networking();
-
-      networking.postNewUser(this.state.usernameInput, this.state.passwordInput);
-    }
+    this.state.passwordInput !== this.state.confirmInput
+      ? this.setState({ error: "Passwords don't match!" })
+      : this.networking.postNewUser(
+          this.state.usernameInput,
+          this.state.passwordInput
+        );
   };
 
   getRegisterForm = () => {
