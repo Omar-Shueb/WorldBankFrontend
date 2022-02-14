@@ -10,7 +10,7 @@ class RegisterPage extends React.Component {
     error: "",
   };
 
-  onChange = (event) => {
+  onInputChange = (event) => {
     if (
       event.target.id === "passwordInput" ||
       event.target.id === "confirmInput"
@@ -20,7 +20,7 @@ class RegisterPage extends React.Component {
     this.setState({ [event.target.id]: event.target.value });
   };
 
-  onSubmit = (event) => {
+  onFormSubmit = (event) => {
     event.preventDefault();
     if (this.state.passwordInput !== this.state.confirmInput) {
       this.setState({ error: "Passwords don't match!" });
@@ -36,14 +36,14 @@ class RegisterPage extends React.Component {
 
   getRegisterForm = () => {
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onFormSubmit}>
         <div>
           <TextField
             id="usernameInput"
             label="Username"
             variant="outlined"
             margin="normal"
-            onChange={this.onChange}
+            onChange={this.onInputChange}
             required
           />
         </div>
@@ -54,7 +54,7 @@ class RegisterPage extends React.Component {
             variant="outlined"
             margin="normal"
             type="password"
-            onChange={this.onChange}
+            onChange={this.onInputChange}
             required
           />
         </div>
@@ -65,7 +65,7 @@ class RegisterPage extends React.Component {
             variant="outlined"
             margin="normal"
             type="password"
-            onChange={this.onChange}
+            onChange={this.onInputChange}
             required
           />
         </div>
