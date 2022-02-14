@@ -6,7 +6,9 @@ import {
   Redirect,
 } from "react-router-dom";
 import LogInPage from "./Components/LogInPage/LogInPage";
+
 import RegisterPage from "./Components/RegisterPage/RegisterPage.js";
+
 import SearchPage from "./Components/SearchPage/SearchPage";
 
 function App() {
