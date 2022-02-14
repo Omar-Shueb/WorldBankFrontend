@@ -1,11 +1,13 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
+import Networking from "../Networking";
 
 class LogInPage extends React.Component {
   state = {
     usernameInput: "",
     passwordInput: "",
   };
+  networking = new Networking();
 
   onChange = (event) => {
     this.setState({ [event.target.id]: event.target.value });
@@ -14,6 +16,7 @@ class LogInPage extends React.Component {
   onSubmit = (event) => {
     event.preventDefault();
     //// networking
+    this.networking.postLogIn(this.state.usernameInput, this.state.passwordInput);
   };
 
   getLogInForm = () => {
