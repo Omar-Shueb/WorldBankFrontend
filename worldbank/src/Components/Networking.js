@@ -1,4 +1,4 @@
-const url = "placeholderURL";
+const url = "http://localhost:8080";
 
 class Networking {
   postLogIn = async (username, password) => {

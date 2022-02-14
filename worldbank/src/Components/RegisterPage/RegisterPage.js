@@ -1,5 +1,6 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
+import Networking from "../Networking";
 
 class RegisterPage extends React.Component {
   state = {
@@ -23,10 +24,14 @@ class RegisterPage extends React.Component {
     event.preventDefault();
     if (this.state.passwordInput !== this.state.confirmInput) {
       this.setState({ error: "Passwords don't match!" });
+    } else {
+      const networking = new Networking();
+
+      networking.postNewUser(
+        this.state.usernameInput,
+        this.state.passwordInput
+      );
     }
-    console.log(this.state.usernameInput);
-    console.log(this.state.passwordInput);
-    console.log(this.state.confirmInput);
   };
 
   getRegisterForm = () => {
