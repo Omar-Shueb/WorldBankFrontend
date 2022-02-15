@@ -36,8 +36,8 @@ class Networking {
     return json;
   };
 
-  postSearch = async (country, indicator, start, end) => {
-    let response = await fetch(`${url}/createaccount`, {
+  postSearch = async (country, indicator, start) => {
+    let response = await fetch(`${url}/search`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -47,7 +47,6 @@ class Networking {
         country: country,
         indicator: indicator,
         start: start,
-        end: end,
       }),
     });
     const json = await response.json();
