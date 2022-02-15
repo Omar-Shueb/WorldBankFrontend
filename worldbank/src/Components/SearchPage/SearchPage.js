@@ -15,6 +15,8 @@ class SearchPage extends React.Component {
   async componentDidMount() {
     const indicators = await this.networking.getDistinctIndicators();
     this.setState({ indicators: indicators });
+    console.log(indicators);
+
   }
 
   handleCountryChange = (event) => {
@@ -47,7 +49,10 @@ class SearchPage extends React.Component {
           </div>
           <div className="search-input">
             <label>Indicators:</label>
-            <Select onChange={this.handleIndicatorChange} options={this.state.indicators} />
+            <Select
+              onChange={this.handleIndicatorChange}
+              options={this.state.indicators}
+            />
           </div>
           <YearPicker
             defaultValue={"Start Year"}
