@@ -58,18 +58,6 @@ class Networking {
 
     return json;
   };
-
-  getDistinctIndicators = async () => {
-    let response = await fetch(`${url}/indicators`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const json = await response.json();
-    return json;
-  };
 }
 
 export default Networking;
