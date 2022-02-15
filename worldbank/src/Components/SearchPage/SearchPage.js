@@ -4,6 +4,7 @@ import Select from "react-select";
 import { Redirect } from "react-router-dom";
 import { YearPicker } from "react-dropdown-date";
 import { countries } from "./countries.js";
+import NavBar from "../NavBar/NavBar";
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class SearchPage extends React.Component {
   getSearchPage = () => {
     return (
       <div className="search-page">
-        {/* <NavBar /> */}
+        <NavBar />
         <form onSubmit={this.handleSubmit} className="search-form">
           <div className="search-input">
             <label>Countries:</label>
