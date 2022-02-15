@@ -37,17 +37,22 @@ class Networking {
   };
 
   postSearch = async (country, indicator, start) => {
-    let response = await fetch(`${url}/search`, {
+    let query = `${url}/search?country=${country}`;
+
+    if (start) {
+      query += `&year=${start}`;
+    }
+
+    if (indicator) {
+      query += `&indicator=${indicator}`;
+    }
+
+    let response = await fetch(query, {
       method: "GET",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        country: country,
-        indicator: indicator,
-        year: start,
-      }),
     });
     const json = await response.json();
 
