@@ -4,7 +4,9 @@ import Select from "react-select";
 import { Redirect } from "react-router-dom";
 import { YearPicker } from "react-dropdown-date";
 import { countries } from "./countries.js";
+import { indicators } from "./indicators.js";
 import NavBar from "../NavBar/NavBar";
+
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -13,17 +15,11 @@ class SearchPage extends React.Component {
       country: "",
       startYear: "",
       indicator: "",
-      indicators: [],
       commitSearch: false,
     };
     this.countries = countries;
   }
   networking = new Networking();
-
-  async componentDidMount() {
-    const indicators = await this.networking.getDistinctIndicators();
-    this.setState({ indicators: indicators });
-  }
 
   handleCountryChange = (event) => {
     this.setState({ country: event.value });
@@ -52,14 +48,14 @@ class SearchPage extends React.Component {
             <Select
               name="country"
               onChange={this.handleCountryChange}
-              options={this.countries}
+              options={countries}
             />
           </div>
           <div className="search-input">
             <label>Indicators:</label>
             <Select
               onChange={this.handleIndicatorChange}
-              options={this.state.indicators}
+              options={indicators}
             />
           </div>
           <YearPicker

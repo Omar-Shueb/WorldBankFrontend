@@ -39,14 +39,20 @@ class ResultsPage extends React.Component {
   }
 
   getGraphs() {
-    console.log(this.state.data);
     return (
       <div>
         <LineChart width={1000} height={400} data={this.state.data}>
           <Line type="monotone" dataKey="value" stroke="#FF4500" />
           <CartesianGrid stroke="#ccc" />
           <XAxis dataKey="year" />
-          <YAxis />
+          <YAxis
+            type="number"
+            domain={[
+              (dataMin) => 0 - Math.abs(dataMin),
+              (dataMax) => Math.ceil((dataMax * 4) / 5) * 5,
+            ]}
+          />
+
           <Tooltip />
         </LineChart>
         <BarChart width={1000} height={300} data={this.state.data}>

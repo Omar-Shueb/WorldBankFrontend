@@ -59,18 +59,6 @@ class Networking {
     return json;
   };
 
-  getDistinctIndicators = async () => {
-    let response = await fetch(`${url}/indicators`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const json = await response.json();
-    return json;
-  };
-
   async getSession() {
     const response = await fetch("http://localhost:8080/session", {
       method: "GET",
