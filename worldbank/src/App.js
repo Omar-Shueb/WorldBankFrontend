@@ -10,6 +10,7 @@ import SearchPage from "./Components/SearchPage/SearchPage";
 
 import ResultsPage from "./Components/ResultsPage/ResultsPage";
 
+
 import Networking from "./Components/Networking";
 
 class App extends React.Component {
@@ -66,6 +67,7 @@ class App extends React.Component {
   render() {
     return <div className="App">{this.state.loggedIn ? this.loggedIn() : this.loggedOut()}</div>;
   }
+
 }
 
 export default App;
