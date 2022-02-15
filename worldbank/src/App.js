@@ -1,6 +1,11 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import LogInPage from "./Components/LogInPage/LogInPage";
 
@@ -9,7 +14,6 @@ import RegisterPage from "./Components/RegisterPage/RegisterPage.js";
 import SearchPage from "./Components/SearchPage/SearchPage";
 
 import ResultsPage from "./Components/ResultsPage/ResultsPage";
-
 
 import Networking from "./Components/Networking";
 
@@ -42,9 +46,7 @@ class App extends React.Component {
         <Route path="/search">
           <SearchPage />
         </Route>
-        <Route path="/results">
-          <ResultsPage />
-        </Route>
+        <Route path="/results" render={(props) => <ResultsPage {...props} />} />
         <Redirect from="/" to="/search" />
       </Switch>
     );
@@ -65,9 +67,12 @@ class App extends React.Component {
   };
 
   render() {
-    return <div className="App">{this.state.loggedIn ? this.loggedIn() : this.loggedOut()}</div>;
+    return (
+      <div className="App">
+        {this.state.loggedIn ? this.loggedIn() : this.loggedOut()}
+      </div>
+    );
   }
-
 }
 
 export default App;
