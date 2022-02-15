@@ -16,6 +16,7 @@ class SearchPage extends React.Component {
     const indicators = await this.networking.getDistinctIndicators();
     this.setState({ indicators: indicators });
     console.log(indicators);
+
   }
 
   handleCountryChange = (event) => {
@@ -34,11 +35,7 @@ class SearchPage extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state.country, this.state.indicator, this.state.startYear);
-    this.networking.postSearch(
-      this.state.country,
-      this.state.indicator,
-      this.state.startYear
-    );
+    this.networking.postSearch(this.state.country, this.state.indicator, this.state.startYear);
   };
 
   render() {
@@ -48,11 +45,7 @@ class SearchPage extends React.Component {
         <form onSubmit={this.handleSubmit} className="search-form">
           <div className="search-input">
             <label>Countries:</label>
-            <Select
-              name="country"
-              onChange={this.handleCountryChange}
-              options={this.countries}
-            />
+            <Select name="country" onChange={this.handleCountryChange} options={this.countries} />
           </div>
           <div className="search-input">
             <label>Indicators:</label>
