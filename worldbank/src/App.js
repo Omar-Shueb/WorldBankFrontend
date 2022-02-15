@@ -5,11 +5,14 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+
 import LogInPage from "./Components/LogInPage/LogInPage";
 
 import RegisterPage from "./Components/RegisterPage/RegisterPage.js";
 
 import SearchPage from "./Components/SearchPage/SearchPage";
+
+import ResultsPage from "./Components/ResultsPage/ResultsPage";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Switch>
           <Route path="/search">
             <SearchPage />
+          </Route>
+          <Route path="/results">
+            <ResultsPage />
           </Route>
           <Route path="/login">
             <LogInPage />
