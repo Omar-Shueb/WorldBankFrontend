@@ -17,12 +17,12 @@ class LogInPage extends React.Component {
     this.setState({ [event.target.id]: event.target.value });
   };
 
-  onFormSubmit = (event) => {
+  onFormSubmit = async (event) => {
     event.preventDefault();
 
     this.setState({ error: "" });
 
-    let json = this.networking.postLogIn(
+    let json = await this.networking.postLogIn(
       this.state.usernameInput,
       this.state.passwordInput
     );
@@ -43,14 +43,14 @@ class LogInPage extends React.Component {
   getLogInForm = () => {
     return (
       <>
-        <form onSubmit={this.onSubmit}>
+        <form onSubmit={this.onFormSubmit}>
           <div>
             <TextField
               id="usernameInput"
               label="Username"
               variant="outlined"
               margin="normal"
-              onChange={this.onChange}
+              onChange={this.onInputChange}
               error={this.state.error.length > 0}
               required
             />
@@ -62,7 +62,7 @@ class LogInPage extends React.Component {
               variant="outlined"
               margin="normal"
               type={this.state.showPassword ? "text" : "password"}
-              onChange={this.onChange}
+              onChange={this.onInputChange}
               error={this.state.error.length > 0}
               helperText={this.state.error}
               InputProps={{

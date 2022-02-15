@@ -3,16 +3,19 @@ import Networking from "../Networking";
 import Select from "react-select";
 import { YearPicker } from "react-dropdown-date";
 import { countries } from "./countries.js";
-import { indicators } from "./indicators.js";
 
 class SearchPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { country: "", startYear: "", indicator: "" };
-    this.Networking = new Networking();
+    this.state = { country: "", startYear: "", indicator: "", indicators: [] };
     this.countries = countries;
-    // do the same with indicators
-    this.indicator = indicators;
+  }
+  networking = new Networking();
+
+  async componentDidMount() {
+    const indicators = await this.networking.getDistinctIndicators();
+    this.setState({ indicators: indicators });
+    console.log(indicators);
   }
 
   handleCountryChange = (event) => {
@@ -31,7 +34,7 @@ class SearchPage extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state.country, this.state.indicator, this.state.startYear);
-    this.Networking.postSearch(
+    this.networking.postSearch(
       this.state.country,
       this.state.indicator,
       this.state.startYear
@@ -55,7 +58,7 @@ class SearchPage extends React.Component {
             <label>Indicators:</label>
             <Select
               onChange={this.handleIndicatorChange}
-              options={this.indicators}
+              options={this.state.indicators}
             />
           </div>
           <YearPicker
