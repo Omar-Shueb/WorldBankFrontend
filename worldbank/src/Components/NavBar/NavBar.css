@@ -1,0 +1,14 @@
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 20%;
+}
+.logo {
+  width: 100px;
+}

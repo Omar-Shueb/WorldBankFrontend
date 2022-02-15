@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Networking from "../Networking";
@@ -22,18 +22,8 @@ class LogInPage extends React.Component {
 
     this.setState({ error: "" });
 
-    let json = await this.networking.postLogIn(
-      this.state.usernameInput,
-      this.state.passwordInput
-    );
-
-    json.success === true
-      ? this.props.history.replace("/search")
-      : this.setState({ error: json.error });
-  };
-
-  onRegisterClick = (event) => {
-    this.props.history.replace("/register");
+    let json = await this.networking.postLogIn(this.state.usernameInput, this.state.passwordInput);
+    json.success ? this.props.checkLogin() : this.setState({ error: json.error });
   };
 
   onShowPasswordClick = () => {
@@ -68,16 +58,8 @@ class LogInPage extends React.Component {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      edge="end"
-                      onClick={this.onShowPasswordClick}
-                    >
-                      {this.state.showPassword ? (
-                        <VisibilityOff />
-                      ) : (
-                        <Visibility />
-                      )}
+                    <IconButton aria-label="toggle password visibility" edge="end" onClick={this.onShowPasswordClick}>
+                      {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -92,9 +74,9 @@ class LogInPage extends React.Component {
             </Button>
           </div>
         </form>
-        <Button variant="text" onClick={this.onRegisterClick}>
-          Register
-        </Button>
+        <Link to="/register">
+          <Button variant="text">Register</Button>
+        </Link>
       </>
     );
   };
