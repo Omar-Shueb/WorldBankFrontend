@@ -7,7 +7,7 @@ import { countries } from "./countries.js";
 class SearchPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { country: "", startYear: "", endYear: "", indicator: "" };
+    this.state = { country: "", startYear: "", indicator: "" };
     this.Networking = new Networking();
     this.countries = countries;
     // do the same with indicators
@@ -24,8 +24,12 @@ class SearchPage extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.country, this.state.indicator, this.state.startYear, this.state.endYear);
-    this.Networking.postSearch(this.state.country, this.state.indicator, this.state.startYear, this.state.endYear);
+    console.log(this.state.country, this.state.indicator, this.state.startYear);
+    this.Networking.postSearch(
+      this.state.country,
+      this.state.indicator,
+      this.state.startYear
+    );
   };
 
   render() {
@@ -35,7 +39,11 @@ class SearchPage extends React.Component {
         <form onSubmit={this.handleSubmit} className="search-form">
           <div className="search-input">
             <label>Countries:</label>
-            <Select name="country" onChange={this.handleCountryChange} options={this.countries} />
+            <Select
+              name="country"
+              onChange={this.handleCountryChange}
+              options={this.countries}
+            />
           </div>
           <div className="search-input">
             <label>Indicators:</label>
@@ -53,18 +61,7 @@ class SearchPage extends React.Component {
             }}
             name={"startYear"}
           />
-          <YearPicker
-            defaultValue={"End Year"}
-            start={1960}
-            end={2015}
-            reverse={true}
-            required={true}
-            value={this.state.endYear}
-            onChange={(year) => {
-              this.setState({ endYear: year });
-            }}
-            name={"endYear"}
-          />
+
           <input type="submit" value="Submit" />
         </form>
       </div>
