@@ -22,9 +22,10 @@ function App() {
           <Route path="/search">
             <SearchPage />
           </Route>
-          <Route path="/results">
-            <ResultsPage />
-          </Route>
+          <Route
+            path="/results"
+            render={(props) => <ResultsPage {...props} />}
+          />
           <Route path="/login">
             <LogInPage />
           </Route>

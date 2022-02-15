@@ -23,8 +23,8 @@ class ResultsPage extends React.Component {
 
   async fetchData() {
     let data = await this.networking.postSearch(
-      "Angola",
-      "Birth rate, crude (per 1,000 people)"
+      this.props.location.state.country,
+      this.props.location.state.indicator
     );
     data = this.processData(data);
     this.setState({ data: data });
