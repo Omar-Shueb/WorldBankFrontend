@@ -44,9 +44,9 @@ class Networking {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        CountryName: country,
-        IndicatorName: indicator,
-        Year: start,
+        country: country,
+        indicator: indicator,
+        year: start,
       }),
     });
     const json = await response.json();
