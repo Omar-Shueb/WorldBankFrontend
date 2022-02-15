@@ -38,7 +38,7 @@ class Networking {
 
   postSearch = async (country, indicator, start) => {
     let response = await fetch(`${url}/search`, {
-      method: "POST",
+      method: "GET",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
