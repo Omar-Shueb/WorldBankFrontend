@@ -49,12 +49,9 @@ class NavBar extends React.Component {
                 sx={{
                   mr: 2,
                   display: { md: "flex" },
-                  background: "#ffffff",
-                  height: "9vh",
-                  width: "9vw",
                 }}
               >
-                <img className="logo" alt="world bank logo" src={logo} />
+                WORLD BANK
                 <ButtonGroup color="secondary" variant="text">
                   <Button component={Link} to={"/search"}>
                     Search
