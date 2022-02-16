@@ -1,5 +1,6 @@
 import "./App.css";
 import React from "react";
+
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import LogInPage from "./Components/LogInPage/LogInPage";
@@ -39,9 +40,9 @@ class App extends React.Component {
     return (
       <Switch>
         <Route path="/search">
-          <SearchPage />
+          <SearchPage checkLogin={this.checkLogin} />
         </Route>
-        <Route path="/results" render={(props) => <ResultsPage {...props} />} />
+        <Route path="/results" render={(props) => <ResultsPage {...props} checkLogin={this.checkLogin} />} />
         <Redirect from="/" to="/search" />
       </Switch>
     );
@@ -62,11 +63,7 @@ class App extends React.Component {
   };
 
   render() {
-    return (
-      <div className="App">
-        {this.state.loggedIn ? this.loggedIn() : this.loggedOut()}
-      </div>
-    );
+    return <div className="App">{this.state.loggedIn ? this.loggedIn() : this.loggedOut()}</div>;
   }
 }
 

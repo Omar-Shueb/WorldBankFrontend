@@ -1,5 +1,9 @@
 import React from "react";
+
 import Graph from "./Graph.js";
+
+import NavBar from "../NavBar/NavBar";
+
 import Networking from "../Networking";
 
 class ResultsPage extends React.Component {
@@ -37,7 +41,7 @@ class ResultsPage extends React.Component {
     );
   }
   render() {
-    return <>{this.getGraphs()}</>;
+    return <><NavBar className="navbar" />{this.getGraphs()}</>;
   }
 }
 
