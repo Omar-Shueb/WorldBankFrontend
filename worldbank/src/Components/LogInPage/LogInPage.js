@@ -22,8 +22,13 @@ class LogInPage extends React.Component {
 
     this.setState({ error: "" });
 
-    let json = await this.networking.postLogIn(this.state.usernameInput, this.state.passwordInput);
-    json.success ? this.props.checkLogin() : this.setState({ error: json.error });
+    let json = await this.networking.postLogIn(
+      this.state.usernameInput,
+      this.state.passwordInput
+    );
+    json.success
+      ? this.props.checkLogin()
+      : this.setState({ error: json.error });
   };
 
   onShowPasswordClick = () => {
@@ -36,6 +41,7 @@ class LogInPage extends React.Component {
         <form onSubmit={this.onFormSubmit}>
           <div>
             <TextField
+              sx={{ width: "20vw" }}
               id="usernameInput"
               label="Username"
               variant="outlined"
@@ -47,6 +53,7 @@ class LogInPage extends React.Component {
           </div>
           <div>
             <TextField
+              sx={{ width: "20vw" }}
               id="passwordInput"
               label="Password"
               variant="outlined"
@@ -58,8 +65,16 @@ class LogInPage extends React.Component {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <IconButton aria-label="toggle password visibility" edge="end" onClick={this.onShowPasswordClick}>
-                      {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      edge="end"
+                      onClick={this.onShowPasswordClick}
+                    >
+                      {!this.state.showPassword ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -69,14 +84,16 @@ class LogInPage extends React.Component {
           </div>
 
           <div>
-            <Button type="submit" variant="outlined">
+            <Link to="/register">
+              <Button variant="outlined" sx={{ width: "10vw" }}>
+                Register
+              </Button>
+            </Link>
+            <Button type="submit" variant="outlined" sx={{ width: "10vw" }}>
               Log In
             </Button>
           </div>
         </form>
-        <Link to="/register">
-          <Button variant="text">Register</Button>
-        </Link>
       </>
     );
   };

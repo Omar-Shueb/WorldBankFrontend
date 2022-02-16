@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Networking from "../Networking";
@@ -35,11 +35,6 @@ class RegisterPage extends React.Component {
       this.props.history.replace("/login");
     }
   };
-
-  onLogInClick = () => {
-    this.props.history.replace("/login");
-  };
-
   onShowPasswordClick = () => {
     this.setState({ showPassword: !this.state.showPassword });
   };
@@ -50,6 +45,7 @@ class RegisterPage extends React.Component {
         <form onSubmit={this.onFormSubmit}>
           <div>
             <TextField
+              sx={{ width: "20vw" }}
               id="usernameInput"
               label="Username"
               variant="outlined"
@@ -60,6 +56,7 @@ class RegisterPage extends React.Component {
           </div>
           <div>
             <TextField
+              sx={{ width: "20vw" }}
               id="passwordInput"
               label="Password"
               variant="outlined"
@@ -75,7 +72,7 @@ class RegisterPage extends React.Component {
                       edge="end"
                       onClick={this.onShowPasswordClick}
                     >
-                      {this.state.showPassword ? (
+                      {!this.state.showPassword ? (
                         <VisibilityOff />
                       ) : (
                         <Visibility />
@@ -89,6 +86,7 @@ class RegisterPage extends React.Component {
           </div>
           <div>
             <TextField
+              sx={{ width: "20vw" }}
               id="confirmInput"
               label="Confirm Password"
               variant="outlined"
@@ -105,7 +103,7 @@ class RegisterPage extends React.Component {
                       edge="end"
                       onClick={this.onShowPasswordClick}
                     >
-                      {this.state.showPassword ? (
+                      {!this.state.showPassword ? (
                         <VisibilityOff />
                       ) : (
                         <Visibility />
@@ -118,14 +116,20 @@ class RegisterPage extends React.Component {
             />
           </div>
           <div>
-            <Button type="submit" variant="outlined">
+            <Link to="/login">
+              <Button
+                variant="outlined"
+                onClick={this.onLogInClick}
+                sx={{ width: "10vw" }}
+              >
+                Log In
+              </Button>
+            </Link>
+            <Button type="submit" variant="outlined" sx={{ width: "10vw" }}>
               Submit
             </Button>
           </div>
         </form>
-        <Button variant="text" onClick={this.onLogInClick}>
-          Log In
-        </Button>
       </>
     );
   };
@@ -135,4 +139,4 @@ class RegisterPage extends React.Component {
   }
 }
 
-export default withRouter(RegisterPage);
+export default RegisterPage;
