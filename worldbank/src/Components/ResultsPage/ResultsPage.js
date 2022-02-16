@@ -19,7 +19,9 @@ class ResultsPage extends React.Component {
   async fetchData() {
     let data = await this.networking.postSearch(
       this.props.location.state.country,
-      this.props.location.state.indicator
+      this.props.location.state.indicator,
+      this.props.location.state.startYear,
+      this.props.location.state.endYear
     );
     data = this.processData(data);
     this.setState({ data: data });

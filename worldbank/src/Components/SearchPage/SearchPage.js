@@ -6,7 +6,7 @@ import { YearPicker } from "react-dropdown-date";
 import { countries } from "./countries.js";
 import { indicators } from "./indicators.js";
 import NavBar from "../NavBar/NavBar";
-
+import { Button } from "@mui/material";
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -14,6 +14,7 @@ class SearchPage extends React.Component {
     this.state = {
       country: "",
       startYear: "",
+      endYear: "",
       indicator: "",
       commitSearch: false,
       indicators: indicators,
@@ -44,32 +45,50 @@ class SearchPage extends React.Component {
   getSearchPage = () => {
     return (
       <div className="search-page">
-
         <NavBar checkLogin={this.props.checkLogin} />
 
         <form onSubmit={this.handleSubmit} className="search-form">
           <div className="search-input">
             <label>Countries:</label>
-            <Select name="country" onChange={this.handleCountryChange} options={countries} />
+            <Select
+              name="country"
+              onChange={this.handleCountryChange}
+              options={countries}
+            />
           </div>
           <div className="search-input">
             <label>Indicators:</label>
-            <Select onChange={this.handleIndicatorChange} options={this.state.indicators} />
+            <Select
+              onChange={this.handleIndicatorChange}
+              options={this.state.indicators}
+            />
           </div>
           <YearPicker
             defaultValue={"Start Year"}
             start={1960}
-            end={2015}
+            end={2014}
             reverse={true}
-            required={true}
             value={this.state.startYear}
             onChange={(year) => {
               this.setState({ startYear: year });
             }}
             name={"startYear"}
           />
+          <YearPicker
+            defaultValue={"End Year"}
+            start={this.state.startYear ? this.state.startYear : 1960}
+            end={2015}
+            reverse={true}
+            value={this.state.endYear}
+            onChange={(year) => {
+              this.setState({ endYear: year });
+            }}
+            name={"endYear"}
+          />
 
-          <input type="submit" value="Submit" />
+          <Button type="submit" value="Submit" variant="outlined">
+            Search
+          </Button>
         </form>
       </div>
     );
@@ -85,6 +104,7 @@ class SearchPage extends React.Component {
               state: {
                 country: this.state.country,
                 startYear: this.state.startYear,
+                endYear: this.state.endYear,
                 indicator: this.state.indicator,
               },
             }}

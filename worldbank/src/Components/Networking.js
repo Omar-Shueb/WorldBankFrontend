@@ -36,11 +36,15 @@ class Networking {
     return json;
   };
 
-  postSearch = async (country, indicator, start) => {
+  postSearch = async (country, indicator, start, end) => {
     let query = `${url}/search?country=${country}`;
 
     if (start) {
       query += `&year=${start}`;
+    }
+
+    if (end) {
+      query += `&yearEnd=${end}`;
     }
 
     if (indicator) {
