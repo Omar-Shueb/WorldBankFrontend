@@ -82,6 +82,20 @@ class Networking {
     const json = await response.json();
     return await json.success;
   }
+
+  async getIndicators(country) {
+    const response = await fetch(`http://localhost:8080/indicators/${country}`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+    if (json.success) {
+      return json.indicators;
+    } else return [];
+  }
 }
 
 export default Networking;
