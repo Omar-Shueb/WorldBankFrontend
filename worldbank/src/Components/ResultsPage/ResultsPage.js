@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts";
+import Graph from "./Graph.js";
 import Networking from "../Networking";
 
 class ResultsPage extends React.Component {
@@ -41,27 +32,7 @@ class ResultsPage extends React.Component {
   getGraphs() {
     return (
       <div>
-        <LineChart width={1000} height={400} data={this.state.data}>
-          <Line type="monotone" dataKey="value" stroke="#FF4500" />
-          <CartesianGrid stroke="#ccc" />
-          <XAxis dataKey="year" />
-          <YAxis
-            type="number"
-            domain={[
-              (dataMin) => 0 - Math.abs(dataMin),
-              (dataMax) => Math.ceil((dataMax * 4) / 5) * 5,
-            ]}
-          />
-
-          <Tooltip />
-        </LineChart>
-        <BarChart width={1000} height={300} data={this.state.data}>
-          <CartesianGrid />
-          <XAxis dataKey="year" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="value" fill="#FF4500" />
-        </BarChart>
+        <Graph line={false} data={this.state.data} />
       </div>
     );
   }
