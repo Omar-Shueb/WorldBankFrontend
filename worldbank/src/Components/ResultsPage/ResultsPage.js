@@ -41,7 +41,12 @@ class ResultsPage extends React.Component {
     );
   }
   render() {
-    return <><NavBar className="navbar" />{this.getGraphs()}</>;
+    return (
+      <>
+        <NavBar className="navbar" />
+        {this.getGraphs()}
+      </>
+    );
   }
 }
 
