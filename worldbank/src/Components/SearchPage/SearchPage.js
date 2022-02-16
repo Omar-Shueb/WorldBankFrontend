@@ -7,6 +7,7 @@ import { countries } from "./countries.js";
 import { indicators } from "./indicators.js";
 import NavBar from "../NavBar/NavBar";
 
+
 class SearchPage extends React.Component {
   constructor(props) {
     super(props);
@@ -43,7 +44,9 @@ class SearchPage extends React.Component {
   getSearchPage = () => {
     return (
       <div className="search-page">
+
         <NavBar checkLogin={this.props.checkLogin} />
+
         <form onSubmit={this.handleSubmit} className="search-form">
           <div className="search-input">
             <label>Countries:</label>

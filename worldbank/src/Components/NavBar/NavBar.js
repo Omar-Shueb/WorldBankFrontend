@@ -15,10 +15,13 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className="header">
-        <img className="logo" alt="world bank logo" src={logo}></img>
+        {/* <img className="logo" alt="world bank logo" src={logo}></img> */}
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mr-auto">
+              <li>
+                <img className="logo" alt="world bank logo" src={logo}></img>
+              </li>
               <li className="nav-item active">
                 <Link to="/search">
                   <button className="search-btn">Search</button>
