@@ -6,7 +6,7 @@ import { YearPicker } from "react-dropdown-date";
 import { countries } from "./countries.js";
 import { indicators } from "./indicators.js";
 import NavBar from "../NavBar/NavBar";
-// import "./App.css";
+
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -16,13 +16,16 @@ class SearchPage extends React.Component {
       startYear: "",
       indicator: "",
       commitSearch: false,
+      indicators: indicators,
     };
     this.countries = countries;
+    this.networking = new Networking();
   }
-  networking = new Networking();
 
-  handleCountryChange = (event) => {
-    this.setState({ country: event.value });
+  handleCountryChange = async (event) => {
+    await this.setState({ country: event.value });
+    const response = await this.networking.getIndicators(this.state.country);
+    await this.setState({ indicators: response });
   };
 
   handleIndicatorChange = (event) => {
@@ -41,22 +44,17 @@ class SearchPage extends React.Component {
   getSearchPage = () => {
     return (
       <div className="search-page">
-        <NavBar className="navbar" />
+
+        <NavBar checkLogin={this.props.checkLogin} />
+
         <form onSubmit={this.handleSubmit} className="search-form">
           <div className="search-input">
             <label>Countries:</label>
-            <Select
-              name="country"
-              onChange={this.handleCountryChange}
-              options={countries}
-            />
+            <Select name="country" onChange={this.handleCountryChange} options={countries} />
           </div>
           <div className="search-input">
             <label>Indicators:</label>
-            <Select
-              onChange={this.handleIndicatorChange}
-              options={indicators}
-            />
+            <Select onChange={this.handleIndicatorChange} options={this.state.indicators} />
           </div>
           <YearPicker
             defaultValue={"Start Year"}

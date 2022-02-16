@@ -2,8 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 import logo from "./logo.png";
+import Networking from "../Networking";
 
 class NavBar extends React.Component {
+  networking = new Networking();
+
+  handleLogout = async () => {
+    await this.networking.patchSession();
+    await this.props.checkLogin();
+  };
+
   render() {
     return (
       <div className="header">
@@ -26,9 +34,7 @@ class NavBar extends React.Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/logout">
-                  <button>Log out</button>
-                </Link>
+                <button onClick={this.handleLogout}>Log out</button>
               </li>
             </ul>
           </div>
