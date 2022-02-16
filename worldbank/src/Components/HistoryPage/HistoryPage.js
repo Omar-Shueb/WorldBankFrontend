@@ -10,24 +10,7 @@ class HistoryPage extends React.Component {
     this.state = {
       currentlySelected: null,
       search: false,
-      history: [
-        {
-          id: "1",
-          country: "Angola",
-          indicator: "Search",
-          startYear: 1990,
-          endYear: 2000,
-          created_at: "2020-10-01",
-        },
-        {
-          id: "2",
-          country: "Angola",
-          indicator: "Search",
-          startYear: 1990,
-          endYear: 2000,
-          created_at: "2020-10-01",
-        },
-      ],
+      history: [],
     };
   }
   networking = new Networking();
@@ -37,7 +20,7 @@ class HistoryPage extends React.Component {
   }
 
   async getHistoryComponents() {
-    const history = await this.networking.getUserHistory();
+    const history = await this.networking.getHistory();
     this.setState({ history: history });
   }
 
@@ -51,23 +34,25 @@ class HistoryPage extends React.Component {
   };
 
   handleRedirect = () => {
-    console.log("redirecting to search");
-    // return (
-    // <Redirect
-    //   to={{
-    //     pathname: "/results",
-    //     state: {
-    //       country: this.state.country,
-    //       startYear: this.state.startYear,
-    //       indicator: this.state.indicator,
-    //     },
-    //   }}
-    // />
-    // );
+    const [data] = this.state.history.filter((search) => {
+      return search.id === parseInt(this.state.currentlySelected);
+    });
+    return (
+      <Redirect
+        to={{
+          pathname: "/results",
+          state: {
+            country: data.country_id,
+            startYear: data.year,
+            endYear: data.year_end,
+            indicator: data.indicator_id,
+          },
+        }}
+      />
+    );
   };
 
   render() {
-    console.log(this.state.search);
     return (
       <>
         {this.state.search ? (
