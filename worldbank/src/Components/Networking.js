@@ -70,6 +70,18 @@ class Networking {
     const json = await response.json();
     return await json.success;
   }
+
+  async patchSession() {
+    const response = await fetch("http://localhost:8080/session", {
+      method: "PATCH",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+    return await json.success;
+  }
 }
 
 export default Networking;

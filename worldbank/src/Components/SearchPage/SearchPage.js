@@ -7,7 +7,6 @@ import { countries } from "./countries.js";
 import { indicators } from "./indicators.js";
 import NavBar from "../NavBar/NavBar";
 
-
 class SearchPage extends React.Component {
   constructor(props) {
     super(props);
@@ -41,22 +40,15 @@ class SearchPage extends React.Component {
   getSearchPage = () => {
     return (
       <div className="search-page">
-        <NavBar />
+        <NavBar checkLogin={this.props.checkLogin} />
         <form onSubmit={this.handleSubmit} className="search-form">
           <div className="search-input">
             <label>Countries:</label>
-            <Select
-              name="country"
-              onChange={this.handleCountryChange}
-              options={countries}
-            />
+            <Select name="country" onChange={this.handleCountryChange} options={countries} />
           </div>
           <div className="search-input">
             <label>Indicators:</label>
-            <Select
-              onChange={this.handleIndicatorChange}
-              options={indicators}
-            />
+            <Select onChange={this.handleIndicatorChange} options={indicators} />
           </div>
           <YearPicker
             defaultValue={"Start Year"}
