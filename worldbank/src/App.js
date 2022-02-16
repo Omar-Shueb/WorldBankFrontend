@@ -33,7 +33,6 @@ class App extends React.Component {
     } else {
       this.setState({ loggedIn: false });
     }
-    console.log(this.state.loggedIn);
   };
 
   loggedIn = () => {
@@ -42,7 +41,12 @@ class App extends React.Component {
         <Route path="/search">
           <SearchPage checkLogin={this.checkLogin} />
         </Route>
-        <Route path="/results" render={(props) => <ResultsPage {...props} checkLogin={this.checkLogin} />} />
+        <Route
+          path="/results"
+          render={(props) => (
+            <ResultsPage {...props} checkLogin={this.checkLogin} />
+          )}
+        />
         <Redirect from="/" to="/search" />
       </Switch>
     );
@@ -63,7 +67,11 @@ class App extends React.Component {
   };
 
   render() {
-    return <div className="App">{this.state.loggedIn ? this.loggedIn() : this.loggedOut()}</div>;
+    return (
+      <div className="App">
+        {this.state.loggedIn ? this.loggedIn() : this.loggedOut()}
+      </div>
+    );
   }
 }
 
