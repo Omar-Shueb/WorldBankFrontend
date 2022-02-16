@@ -1,8 +1,3 @@
-.navbar-nav {
-  display: flex;
-  flex-direction: row;
-  list-style-type: none;
-}
 .header {
   display: flex;
   flex-direction: row;
@@ -12,5 +7,9 @@
   background-color: white;
 }
 .logo {
+  align-self: center;
   width: 100px;
+  height: 60px;
+  margin-left: 1vw;
+  margin-right: 1vw;
 }
