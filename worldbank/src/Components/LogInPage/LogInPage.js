@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Networking from "../Networking";
@@ -86,4 +86,4 @@ class LogInPage extends React.Component {
   }
 }
 
-export default withRouter(LogInPage);
+export default LogInPage;
