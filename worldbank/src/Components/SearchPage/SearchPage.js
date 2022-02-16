@@ -6,7 +6,7 @@ import { YearPicker } from "react-dropdown-date";
 import { countries } from "./countries.js";
 import { indicators } from "./indicators.js";
 import NavBar from "../NavBar/NavBar";
-
+// import "./App.css";
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class SearchPage extends React.Component {
   getSearchPage = () => {
     return (
       <div className="search-page">
-        <NavBar />
+        <NavBar className="navbar" />
         <form onSubmit={this.handleSubmit} className="search-form">
           <div className="search-input">
             <label>Countries:</label>

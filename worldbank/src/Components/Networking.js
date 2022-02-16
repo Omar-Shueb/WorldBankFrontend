@@ -70,6 +70,20 @@ class Networking {
     const json = await response.json();
     return await json.success;
   }
+
+  /// the function takes the cookie and sends a fetch request to the server endpoint /history with the session cookie as a parameter
+  /// an arraay of all searches for the user matching the session cookie is returned
+  async getUserHistory() {
+    const response = await fetch(`http://localhost:8080/history`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+    return json;
+  }
 }
 
 export default Networking;
