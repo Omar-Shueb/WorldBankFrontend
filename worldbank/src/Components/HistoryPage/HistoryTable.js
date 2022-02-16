@@ -50,10 +50,10 @@ class HistoryTable extends React.Component {
                     />
                   </TableCell>
                   <TableCell>{i + 1}</TableCell>
-                  <TableCell>{row.country}</TableCell>
-                  <TableCell align="left">{row.indicator}</TableCell>
-                  <TableCell align="left">{row.startYear}</TableCell>
-                  <TableCell align="left">{row.endYear}</TableCell>
+                  <TableCell>{row.country_name}</TableCell>
+                  <TableCell align="left">{row.indicator_name}</TableCell>
+                  <TableCell align="left">{row.year ? row.year : ""}</TableCell>
+                  <TableCell align="left">{row.year_end ? row.year_end : ""}</TableCell>
                   <TableCell align="left">{row.created_at}</TableCell>
                 </TableRow>
               ))}

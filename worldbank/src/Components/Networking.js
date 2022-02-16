@@ -117,15 +117,19 @@ class Networking {
   }
 
   async getHistory() {
-    const response = await fetch("http://localhost:8080/history", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const json = await response.json();
-    return json;
+    try {
+      const response = await fetch("http://localhost:8080/history", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const json = await response.json();
+      return json;
+    } catch (error) {
+      return [];
+    }
   }
 }
 
