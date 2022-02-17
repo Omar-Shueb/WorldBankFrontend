@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ThemeProvider } from "@mui/material/styles";
@@ -13,6 +13,7 @@ class RegisterPage extends React.Component {
     confirmInput: "",
     error: "",
     showPassword: false,
+    redirect: false,
   };
   networking = new Networking();
 
@@ -30,11 +31,15 @@ class RegisterPage extends React.Component {
     if (this.state.passwordInput !== this.state.confirmInput) {
       this.setState({ error: "Passwords don't match!" });
     } else {
-      await this.networking.postNewUser(
+      const response = await this.networking.postNewUser(
         this.state.usernameInput,
         this.state.passwordInput
       );
-      this.props.history.replace("/login");
+      if (response.success) {
+        this.setState({ redirect: true });
+      } else {
+        this.setState({ error: response.error });
+      }
     }
   };
   onShowPasswordClick = () => {
@@ -144,7 +149,15 @@ class RegisterPage extends React.Component {
   };
 
   render() {
-    return <div className="App">{this.getRegisterForm()}</div>;
+    return (
+      <div className="App">
+        {this.state.redirect ? (
+          <Redirect to="/login" />
+        ) : (
+          this.getRegisterForm()
+        )}
+      </div>
+    );
   }
 }
 
