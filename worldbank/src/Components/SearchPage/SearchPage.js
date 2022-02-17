@@ -6,20 +6,26 @@ import { YearPicker } from "react-dropdown-date";
 import { countries } from "./countries.js";
 import { indicators } from "./indicators.js";
 import NavBar from "../NavBar/NavBar";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../Theme.js";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+
+// body : {countries: [...], indicators: [...], year: ... , yearEnd : ...}
 
 class SearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      country: "",
+      country: [],
       startYear: "",
       endYear: "",
-      indicator: "",
+      indicator: [],
       commitSearch: false,
       indicators: indicators,
+      indicatorDropdowns: 1,
+      countryDropdowns: 1,
     };
     this.countries = countries;
     this.networking = new Networking();
@@ -32,7 +38,13 @@ class SearchPage extends React.Component {
   };
 
   handleIndicatorChange = (event) => {
-    this.setState({ indicator: event.value });
+    const dummyArray = this.state.indicator.map((x) => x);
+
+    dummyArray[event.key] = event.value;
+
+    console.log(event);
+
+    this.setState({ indicator: dummyArray });
   };
 
   handleChange = (event) => {
@@ -44,53 +56,169 @@ class SearchPage extends React.Component {
     this.setState({ commitSearch: true });
   };
 
+  getIndicatorSelector = (indicatorDropdown) => {
+    const indicatorSelectors = [];
+
+    for (let i = 0; i < indicatorDropdown; i++) {
+      indicatorSelectors.push(
+        <div style={{ marginBottom: "2vh" }}>
+          <Select
+            styles={{ margin: "100px" }}
+            key={i}
+            name={i}
+            onChange={(event, target) => {
+              const dummyArray = this.state.indicator.map((x) => x);
+
+              dummyArray[target.name] = event.value;
+
+              this.setState({ indicator: dummyArray });
+            }}
+            options={this.state.indicators}
+          />
+        </div>
+      );
+    }
+    return <>{indicatorSelectors}</>;
+  };
+
+  getAllIndicators = () => {
+    return (
+      <div className="search-input">
+        <label>Indicators:</label>
+        {this.getIndicatorSelector(this.state.indicatorDropdowns)}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <IconButton
+            onClick={() =>
+              this.setState({
+                indicatorDropdowns: this.state.indicatorDropdowns - 1,
+              })
+            }
+            disabled={this.state.indicatorDropdowns === 1}
+          >
+            <ExpandLessIcon />
+          </IconButton>
+          <IconButton
+            onClick={() =>
+              this.setState({
+                indicatorDropdowns: this.state.indicatorDropdowns + 1,
+              })
+            }
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </div>
+      </div>
+    );
+  };
+
+  getCountrySelector = (countryDropdown) => {
+    const countrySelectors = [];
+
+    for (let i = 0; i < countryDropdown; i++) {
+      countrySelectors.push(
+        <div style={{ marginBottom: "2vh" }}>
+          <Select
+            styles={{ margin: "100px" }}
+            key={i}
+            name={i}
+            onChange={(event, target) => {
+              const dummyArray = this.state.country.map((x) => x);
+
+              dummyArray[target.name] = event.value;
+
+              this.setState({ country: dummyArray });
+            }}
+            options={countries}
+          />
+        </div>
+      );
+    }
+    return <>{countrySelectors}</>;
+  };
+
+  getAllCountries = () => {
+    return (
+      <div className="search-input">
+        <label>Countries:</label>
+        {this.getCountrySelector(this.state.countryDropdowns)}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <IconButton
+            onClick={() =>
+              this.setState({
+                countryDropdowns: this.state.countryDropdowns - 1,
+              })
+            }
+            disabled={this.state.countryDropdowns === 1}
+          >
+            <ExpandLessIcon />
+          </IconButton>
+          <IconButton
+            onClick={() =>
+              this.setState({
+                countryDropdowns: this.state.countryDropdowns + 1,
+              })
+            }
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </div>
+      </div>
+    );
+  };
+
   getSearchPage = () => {
     return (
       <ThemeProvider theme={theme}>
         <div className="search-page">
           <NavBar checkLogin={this.props.checkLogin} />
           <form onSubmit={this.handleSubmit} className="search-form">
-            <div className="search-input">
-              <label>Countries:</label>
-              <Select
-                name="country"
-                onChange={this.handleCountryChange}
-                options={countries}
+            {this.getAllCountries()}
+            {this.getAllIndicators()}
+            <div className="year-box">
+              <YearPicker
+                defaultValue={"Start Year"}
+                start={1960}
+                end={2014}
+                reverse={true}
+                value={this.state.startYear}
+                onChange={(year) => {
+                  this.setState({ startYear: year });
+                }}
+                name={"startYear"}
+                classes="year-drop"
               />
-            </div>
-            <div className="search-input">
-              <label>Indicators:</label>
-              <Select
-                onChange={this.handleIndicatorChange}
-                options={this.state.indicators}
+              <YearPicker
+                defaultValue={"End Year"}
+                start={this.state.startYear ? this.state.startYear : 1960}
+                end={2015}
+                reverse={true}
+                value={this.state.endYear}
+                onChange={(year) => {
+                  this.setState({ endYear: year });
+                }}
+                name={"endYear"}
+                classes="year-drop"
               />
-            </div>
-            <YearPicker
-              defaultValue={"Start Year"}
-              start={1960}
-              end={2014}
-              reverse={true}
-              value={this.state.startYear}
-              onChange={(year) => {
-                this.setState({ startYear: year });
-              }}
-              name={"startYear"}
-            />
-            <YearPicker
-              defaultValue={"End Year"}
-              start={this.state.startYear ? this.state.startYear : 1960}
-              end={2015}
-              reverse={true}
-              value={this.state.endYear}
-              onChange={(year) => {
-                this.setState({ endYear: year });
-              }}
-              name={"endYear"}
-            />
 
-            <Button type="submit" value="Submit" variant="outlined">
-              Search
-            </Button>
+              <Button
+                type="submit"
+                value="Submit"
+                variant="outlined"
+                style={{ maxHeight: "5vh", marginTop: "2.5vh" }}
+              >
+                Search
+              </Button>
+            </div>
           </form>
         </div>
       </ThemeProvider>

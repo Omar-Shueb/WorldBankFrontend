@@ -55,6 +55,18 @@
   text-align: left;
 }
 
+.year-box {
+  height: 20vh;
+  display: flex;
+  align-content: center;
+}
+
+.year-drop {
+  margin-top: 2.5vh;
+  height: 5vh;
+  margin-right: 1vw;
+}
+
 .navbar {
   position: fixed;
   top: 0;
