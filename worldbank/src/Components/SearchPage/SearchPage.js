@@ -7,6 +7,8 @@ import { countries } from "./countries.js";
 import { indicators } from "./indicators.js";
 import NavBar from "../NavBar/NavBar";
 import { Button } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "../Theme.js";
 
 class SearchPage extends React.Component {
   constructor(props) {
@@ -44,59 +46,61 @@ class SearchPage extends React.Component {
 
   getSearchPage = () => {
     return (
-      <div className="search-page">
-        <NavBar checkLogin={this.props.checkLogin} />
+      <ThemeProvider theme={theme}>
+        <div className="search-page">
+          <NavBar checkLogin={this.props.checkLogin} />
 
-        <form onSubmit={this.handleSubmit} className="search-form">
-          <div className="search-input">
-            <label>Countries:</label>
-            <Select
-              name="country"
-              onChange={this.handleCountryChange}
-              options={countries}
+          <form onSubmit={this.handleSubmit} className="search-form">
+            <div className="search-input">
+              <label>Countries:</label>
+              <Select
+                name="country"
+                onChange={this.handleCountryChange}
+                options={countries}
+              />
+            </div>
+            <div className="search-input">
+              <label>Indicators:</label>
+              <Select
+                onChange={this.handleIndicatorChange}
+                options={this.state.indicators}
+              />
+            </div>
+            <YearPicker
+              defaultValue={"Start Year"}
+              start={1960}
+              end={2014}
+              reverse={true}
+              value={this.state.startYear}
+              onChange={(year) => {
+                this.setState({ startYear: year });
+              }}
+              name={"startYear"}
             />
-          </div>
-          <div className="search-input">
-            <label>Indicators:</label>
-            <Select
-              onChange={this.handleIndicatorChange}
-              options={this.state.indicators}
+            <YearPicker
+              defaultValue={"End Year"}
+              start={this.state.startYear ? this.state.startYear : 1960}
+              end={2015}
+              reverse={true}
+              value={this.state.endYear}
+              onChange={(year) => {
+                this.setState({ endYear: year });
+              }}
+              name={"endYear"}
             />
-          </div>
-          <YearPicker
-            defaultValue={"Start Year"}
-            start={1960}
-            end={2014}
-            reverse={true}
-            value={this.state.startYear}
-            onChange={(year) => {
-              this.setState({ startYear: year });
-            }}
-            name={"startYear"}
-          />
-          <YearPicker
-            defaultValue={"End Year"}
-            start={this.state.startYear ? this.state.startYear : 1960}
-            end={2015}
-            reverse={true}
-            value={this.state.endYear}
-            onChange={(year) => {
-              this.setState({ endYear: year });
-            }}
-            name={"endYear"}
-          />
 
-          <Button type="submit" value="Submit" variant="outlined">
-            Search
-          </Button>
-        </form>
-      </div>
+            <Button type="submit" value="Submit" variant="outlined">
+              Search
+            </Button>
+          </form>
+        </div>
+      </ThemeProvider>
     );
   };
 
   render() {
     return (
-      <>
+      <div className="App">
         {this.state.commitSearch ? (
           <Redirect
             to={{
@@ -112,7 +116,7 @@ class SearchPage extends React.Component {
         ) : (
           this.getSearchPage()
         )}
-      </>
+      </div>
     );
   }
 }

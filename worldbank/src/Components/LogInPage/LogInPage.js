@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "../Theme.js";
 import Networking from "../Networking";
 
 class LogInPage extends React.Component {
@@ -38,68 +40,79 @@ class LogInPage extends React.Component {
   getLogInForm = () => {
     return (
       <>
-        <form onSubmit={this.onFormSubmit}>
-          <div>
-            <TextField
-              sx={{ width: "20vw" }}
-              id="usernameInput"
-              label="Username"
-              variant="outlined"
-              margin="normal"
-              onChange={this.onInputChange}
-              error={this.state.error.length > 0}
-              required
-            />
-          </div>
-          <div>
-            <TextField
-              sx={{ width: "20vw" }}
-              id="passwordInput"
-              label="Password"
-              variant="outlined"
-              margin="normal"
-              type={this.state.showPassword ? "text" : "password"}
-              onChange={this.onInputChange}
-              error={this.state.error.length > 0}
-              helperText={this.state.error}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      edge="end"
-                      onClick={this.onShowPasswordClick}
-                    >
-                      {!this.state.showPassword ? (
-                        <VisibilityOff />
-                      ) : (
-                        <Visibility />
-                      )}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-              required
-            />
-          </div>
+        <ThemeProvider theme={theme}>
+          <form onSubmit={this.onFormSubmit}>
+            <div>
+              <TextField
+                color="secondary"
+                sx={{ width: "20vw" }}
+                id="usernameInput"
+                label="Username"
+                variant="outlined"
+                margin="normal"
+                onChange={this.onInputChange}
+                error={this.state.error.length > 0}
+                required
+              />
+            </div>
+            <div>
+              <TextField
+                color="secondary"
+                sx={{ width: "20vw" }}
+                id="passwordInput"
+                label="Password"
+                variant="outlined"
+                margin="normal"
+                type={this.state.showPassword ? "text" : "password"}
+                onChange={this.onInputChange}
+                error={this.state.error.length > 0}
+                helperText={this.state.error}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        edge="end"
+                        onClick={this.onShowPasswordClick}
+                      >
+                        {!this.state.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+                required
+              />
+            </div>
 
-          <div>
-            <Link to="/register">
-              <Button variant="outlined" sx={{ width: "10vw" }}>
-                Register
+            <div>
+              <Link to="/register">
+                <Button
+                  variant="outlined"
+                  sx={{ width: "10vw", marginTop: "3vh" }}
+                >
+                  Register
+                </Button>
+              </Link>
+              <Button
+                type="submit"
+                variant="outlined"
+                sx={{ width: "10vw", marginTop: "3vh" }}
+              >
+                Log In
               </Button>
-            </Link>
-            <Button type="submit" variant="outlined" sx={{ width: "10vw" }}>
-              Log In
-            </Button>
-          </div>
-        </form>
+            </div>
+          </form>
+        </ThemeProvider>
       </>
     );
   };
 
   render() {
-    return <>{this.getLogInForm()}</>;
+    return <div className="App">{this.getLogInForm()}</div>;
   }
 }
 

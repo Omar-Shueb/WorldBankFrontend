@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import "./NavBar.css";
-import logo from "./logo.png";
 import Networking from "../Networking";
 
 const theme = createTheme({

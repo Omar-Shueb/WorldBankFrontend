@@ -14,7 +14,7 @@ class Graph extends React.Component {
   getGraphs() {
     return this.props.line ? (
       <LineChart width={600} height={400} data={this.props.data}>
-        <Line type="monotone" dataKey="value" stroke="#FF4500" />
+        <Line type="monotone" dataKey="value" stroke="#ff5722" />
         <CartesianGrid stroke="#ccc" />
         <XAxis dataKey="year" />
         <YAxis
@@ -38,7 +38,7 @@ class Graph extends React.Component {
           ]}
         />
         <Tooltip />
-        <Bar dataKey="value" fill="#FF4500" />
+        <Bar dataKey="value" fill="#ff5722" />
       </BarChart>
     );
   }
