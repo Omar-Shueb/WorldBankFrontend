@@ -3,6 +3,8 @@ import Networking from "../Networking";
 import HistoryTable from "./HistoryTable.js";
 import NavBar from "../NavBar/NavBar";
 import { Redirect } from "react-router-dom";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "../Theme.js";
 
 class HistoryPage extends React.Component {
   constructor(props) {
@@ -54,7 +56,7 @@ class HistoryPage extends React.Component {
 
   render() {
     return (
-      <>
+      <ThemeProvider theme={theme}>
         {this.state.search ? (
           this.handleRedirect()
         ) : (
@@ -70,7 +72,7 @@ class HistoryPage extends React.Component {
             )}
           </div>
         )}
-      </>
+      </ThemeProvider>
     );
   }
 }

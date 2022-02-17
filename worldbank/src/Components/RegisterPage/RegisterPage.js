@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { TextField, Button, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "../Theme.js";
 import Networking from "../Networking";
 
 class RegisterPage extends React.Component {
@@ -41,11 +43,12 @@ class RegisterPage extends React.Component {
 
   getRegisterForm = () => {
     return (
-      <>
+      <ThemeProvider theme={theme}>
         <form onSubmit={this.onFormSubmit}>
           <div>
             <TextField
               sx={{ width: "20vw" }}
+              color="secondary"
               id="usernameInput"
               label="Username"
               variant="outlined"
@@ -57,6 +60,7 @@ class RegisterPage extends React.Component {
           <div>
             <TextField
               sx={{ width: "20vw" }}
+              color="secondary"
               id="passwordInput"
               label="Password"
               variant="outlined"
@@ -87,6 +91,7 @@ class RegisterPage extends React.Component {
           <div>
             <TextField
               sx={{ width: "20vw" }}
+              color="secondary"
               id="confirmInput"
               label="Confirm Password"
               variant="outlined"
@@ -120,22 +125,26 @@ class RegisterPage extends React.Component {
               <Button
                 variant="outlined"
                 onClick={this.onLogInClick}
-                sx={{ width: "10vw" }}
+                sx={{ width: "10vw", marginTop: "3vh" }}
               >
                 Log In
               </Button>
             </Link>
-            <Button type="submit" variant="outlined" sx={{ width: "10vw" }}>
+            <Button
+              type="submit"
+              variant="outlined"
+              sx={{ width: "10vw", marginTop: "3vh" }}
+            >
               Submit
             </Button>
           </div>
         </form>
-      </>
+      </ThemeProvider>
     );
   };
 
   render() {
-    return <>{this.getRegisterForm()}</>;
+    return <div className="App">{this.getRegisterForm()}</div>;
   }
 }
 

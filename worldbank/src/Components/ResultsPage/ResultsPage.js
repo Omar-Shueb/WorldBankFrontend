@@ -38,16 +38,16 @@ class ResultsPage extends React.Component {
   getGraphs() {
     return (
       <div>
-        <Graph line={false} data={this.state.data} />
+        <Graph line={true} data={this.state.data} />
       </div>
     );
   }
   render() {
     return (
-      <>
+      <div className="history-page">
         <NavBar className="navbar" />
         {this.getGraphs()}
-      </>
+      </div>
     );
   }
 }
