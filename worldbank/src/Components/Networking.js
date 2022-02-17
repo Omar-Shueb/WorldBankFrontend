@@ -37,26 +37,20 @@ class Networking {
   };
 
   postSearch = async (country, indicator, start, end) => {
-    let query = `${url}/search?country=${country}`;
-
-    if (start) {
-      query += `&year=${start}`;
-    }
-
-    if (end) {
-      query += `&yearEnd=${end}`;
-    }
-
-    if (indicator) {
-      query += `&indicator=${indicator}`;
-    }
+    let query = `${url}/search`;
 
     let response = await fetch(query, {
-      method: "GET",
+      method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        country: country,
+        indicator: indicator,
+        year: start,
+        yearEnd: end,
+      }),
     });
     const json = await response.json();
 
@@ -102,13 +96,16 @@ class Networking {
   }
 
   async getIndicators(country) {
-    const response = await fetch(`http://localhost:8080/indicators/${country}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:8080/indicators/${country}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const json = await response.json();
 
     if (json.success) {

@@ -28,11 +28,19 @@ class ResultsPage extends React.Component {
   }
 
   processData(data) {
-    const finalData = [];
+    const dataArray = [];
     data.forEach((item) => {
-      finalData.push({ name: item.year, year: item.year, value: item.value });
+      dataArray.push({
+        year: item.year,
+        value: parseInt(item.value),
+      });
     });
-    return data;
+    const processedData = {
+      country: data[0].countryname,
+      indicator: data[0].indicatorname,
+      data: dataArray,
+    };
+    return processedData;
   }
 
   getGraphs() {
