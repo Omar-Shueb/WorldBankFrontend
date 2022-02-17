@@ -19,11 +19,15 @@ class RegisterPage extends React.Component {
 
   onInputChange = async (event) => {
     await this.setState({ [event.target.id]: event.target.value });
+
+    let error = "";
     if (this.state.passwordInput !== this.state.confirmInput) {
-      this.setState({ error: "Passwords don't match!" });
-    } else {
-      this.setState({ error: "" });
+      error += "Passwords don't match! \n ";
     }
+    if (this.state.passwordInput.length < 8) {
+      error += "Passwords must be at least 8 characters long!";
+    }
+    this.setState({ error: error });
   };
 
   onFormSubmit = async (event) => {
@@ -138,6 +142,10 @@ class RegisterPage extends React.Component {
             <Button
               type="submit"
               variant="outlined"
+              disabled={
+                this.state.passwordInput !== this.state.confirmInput ||
+                this.state.passwordInput.length < 8
+              }
               sx={{ width: "10vw", marginTop: "3vh" }}
             >
               Submit

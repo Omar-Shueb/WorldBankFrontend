@@ -100,6 +100,9 @@ class LogInPage extends React.Component {
               <Button
                 type="submit"
                 variant="outlined"
+                disabled={
+                  !this.state.usernameInput || !this.state.passwordInput
+                }
                 sx={{ width: "10vw", marginTop: "3vh" }}
               >
                 Log In
