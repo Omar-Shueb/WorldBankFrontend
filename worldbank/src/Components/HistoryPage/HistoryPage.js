@@ -57,23 +57,21 @@ class HistoryPage extends React.Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <div>
-          {this.state.search ? (
-            this.handleRedirect()
-          ) : (
-            <div className="history-page">
-              <NavBar className="navbar" checkLogin={this.props.checkLogin} />
-              {this.state.history && (
-                <HistoryTable
-                  history={this.state.history}
-                  selected={this.state.currentlySelected}
-                  changeSelected={this.changeSelected}
-                  updateSearch={this.updateSearch}
-                />
-              )}
-            </div>
-          )}
-        </div>
+        {this.state.search ? (
+          this.handleRedirect()
+        ) : (
+          <div className="history-page">
+            <NavBar className="navbar" checkLogin={this.props.checkLogin} />
+            {this.state.history && (
+              <HistoryTable
+                history={this.state.history}
+                selected={this.state.currentlySelected}
+                changeSelected={this.changeSelected}
+                updateSearch={this.updateSearch}
+              />
+            )}
+          </div>
+        )}
       </ThemeProvider>
     );
   }

@@ -49,7 +49,6 @@ class SearchPage extends React.Component {
       <ThemeProvider theme={theme}>
         <div className="search-page">
           <NavBar checkLogin={this.props.checkLogin} />
-
           <form onSubmit={this.handleSubmit} className="search-form">
             <div className="search-input">
               <label>Countries:</label>
