@@ -26,7 +26,10 @@ class HistoryTable extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <Button disabled={!this.props.selected} onClick={this.handleClick}>
+                  <Button
+                    disabled={!this.props.selected}
+                    onClick={this.handleClick}
+                  >
                     Search Again
                   </Button>
                 </TableCell>
@@ -40,7 +43,10 @@ class HistoryTable extends React.Component {
             </TableHead>
             <TableBody>
               {this.props.history.map((row, i) => (
-                <TableRow key={row.id} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+                <TableRow
+                  key={row.history_id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
                   <TableCell>
                     <Checkbox
                       color="primary"
@@ -53,7 +59,9 @@ class HistoryTable extends React.Component {
                   <TableCell>{row.country_name}</TableCell>
                   <TableCell align="left">{row.indicator_name}</TableCell>
                   <TableCell align="left">{row.year ? row.year : ""}</TableCell>
-                  <TableCell align="left">{row.year_end ? row.year_end : ""}</TableCell>
+                  <TableCell align="left">
+                    {row.year_end ? row.year_end : ""}
+                  </TableCell>
                   <TableCell align="left">{row.created_at}</TableCell>
                 </TableRow>
               ))}
