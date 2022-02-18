@@ -13,6 +13,7 @@ class HistoryPage extends React.Component {
       currentlySelected: null,
       search: false,
       history: [],
+      isAdmin: false,
     };
   }
   networking = new Networking();
@@ -23,7 +24,9 @@ class HistoryPage extends React.Component {
 
   async getHistoryComponents() {
     const history = await this.networking.getHistory();
-    this.setState({ history: history });
+
+    const isAdmin = history[0].username ? true : false;
+    this.setState({ history: history, isAdmin: isAdmin });
   }
 
   changeSelected = (id) => {
@@ -65,6 +68,7 @@ class HistoryPage extends React.Component {
             {this.state.history && (
               <HistoryTable
                 history={this.state.history}
+                isAdmin={this.state.isAdmin}
                 selected={this.state.currentlySelected}
                 changeSelected={this.changeSelected}
                 updateSearch={this.updateSearch}
