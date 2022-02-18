@@ -47,11 +47,12 @@ class NavBar extends React.Component {
                 component="div"
                 sx={{
                   mr: 2,
+                  ml: 2,
                   display: { md: "flex" },
                 }}
               >
                 WORLD BANK
-                <ButtonGroup color="secondary" variant="text">
+                <ButtonGroup sx={{ ml: 2 }} color="secondary" variant="text">
                   <Button component={Link} to={"/search"}>
                     Search
                   </Button>
@@ -60,7 +61,7 @@ class NavBar extends React.Component {
                   </Button>
                 </ButtonGroup>
               </Typography>
-              <div>
+              <div className="logout-btn">
                 <Button color="secondary" onClick={this.handleLogout}>
                   Log Out
                 </Button>
