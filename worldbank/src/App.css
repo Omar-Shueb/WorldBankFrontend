@@ -86,3 +86,21 @@
   margin: auto;
   margin-top: 15vh;
 }
+
+.graphs {
+  width: 90%;
+  margin: auto;
+  margin-top: -3vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.graph {
+  margin: 2vh;
+}
+
+.logout-btn {
+  margin-right: 30px;
+}

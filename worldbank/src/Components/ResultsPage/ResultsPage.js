@@ -1,6 +1,7 @@
 import React from "react";
 
-import Graph from "./Graph.js";
+import BarGraph from "./BarGraph.js";
+import LineGraph from "./LineGraph.js";
 
 import NavBar from "../NavBar/NavBar";
 
@@ -23,38 +24,61 @@ class ResultsPage extends React.Component {
       this.props.location.state.startYear,
       this.props.location.state.endYear
     );
-    data = this.processData(data);
-    this.setState({ data: data });
+    const processData = this.processData(data);
+    this.setState({ data: processData });
   }
 
-  processData(data) {
-    const dataArray = [];
-    data.forEach((item) => {
-      dataArray.push({
-        year: item.year,
-        value: parseInt(item.value),
-      });
+  processData = (data) => {
+    const processData = data.map((row) => {
+      return {
+        indicatorname: row.indicatorname,
+        year: row.year,
+        [row.countryname]: row.value,
+        countryname: row.countryname,
+      };
     });
-    const processedData = {
-      country: data[0].countryname,
-      indicator: data[0].indicatorname,
-      data: dataArray,
-    };
-    return processedData;
-  }
+    return processData;
+  };
 
-  getGraphs() {
-    return (
-      <div>
-        <Graph line={true} data={this.state.data} />
-      </div>
-    );
-  }
+  getNumberOfYears = (data) => {
+    const years = [
+      ...new Set(
+        data.map((row) => {
+          return row.year;
+        })
+      ),
+    ];
+    return years;
+  };
+
+  getGraphs = () => {
+    const indicators = [
+      ...new Set(
+        this.state.data.map((row) => {
+          return row.indicatorname;
+        })
+      ),
+    ];
+
+    const graphs = indicators.map((indicator) => {
+      const data = this.state.data.filter((row) => {
+        return row.indicatorname === indicator;
+      });
+      const years = this.getNumberOfYears(data);
+      return years.length > 3 ? (
+        <LineGraph data={data} indicator={indicator} />
+      ) : (
+        <BarGraph data={data} indicator={indicator} />
+      );
+    });
+    return graphs;
+  };
+
   render() {
     return (
       <div className="history-page">
         <NavBar className="navbar" />
-        {this.getGraphs()}
+        {this.state.data && <div className="graphs">{this.getGraphs()}</div>}
       </div>
     );
   }
