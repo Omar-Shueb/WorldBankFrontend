@@ -11,7 +11,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../Theme.js";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-
+import "./SearchPage.css";
 // body : {countries: [...], indicators: [...], year: ... , yearEnd : ...}
 
 class SearchPage extends React.Component {
@@ -26,6 +26,7 @@ class SearchPage extends React.Component {
       indicators: indicators,
       indicatorDropdowns: 1,
       countryDropdowns: 1,
+      error: "",
     };
     this.countries = countries;
     this.networking = new Networking();
@@ -138,7 +139,19 @@ class SearchPage extends React.Component {
         </div>
       );
     }
-    return <>{countrySelectors}</>;
+    return (
+      <div>
+        <>{countrySelectors}</>
+        <>
+          {" "}
+          {this.state.country.length === 0 ? (
+            <p className="error">You must select a country!</p>
+          ) : (
+            <div></div>
+          )}
+        </>
+      </div>
+    );
   };
 
   getAllCountries = () => {
@@ -214,6 +227,7 @@ class SearchPage extends React.Component {
                 type="submit"
                 value="Submit"
                 variant="outlined"
+                disabled={this.state.country.length === 0}
                 style={{ maxHeight: "5vh", marginTop: "2.5vh" }}
               >
                 Search
