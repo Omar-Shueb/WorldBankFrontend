@@ -32,8 +32,8 @@ class ResultsPage extends React.Component {
     const processData = data.map((row) => {
       return {
         indicatorname: row.indicatorname,
-        year: row.year,
-        [row.countryname]: row.value,
+        year: parseInt(row.year),
+        [row.countryname]: parseInt(row.value),
         countryname: row.countryname,
       };
     });
