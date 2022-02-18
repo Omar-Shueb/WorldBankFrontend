@@ -49,7 +49,7 @@ class App extends React.Component {
         <Route
           path="/results"
           render={(props) => (
-            <ResultsPage {...props} checkLogin={this.checkLogin} />
+            <ResultsPage checkLogin={this.checkLogin} {...props} />
           )}
         />
         <Redirect from="/" to="/search" />

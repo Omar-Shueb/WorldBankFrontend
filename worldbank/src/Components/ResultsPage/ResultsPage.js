@@ -80,7 +80,7 @@ class ResultsPage extends React.Component {
   render() {
     return (
       <div className="history-page">
-        <NavBar className="navbar" checkLogin={this.checkLogin} />
+        <NavBar className="navbar" checkLogin={this.props.checkLogin} />
         {this.state.data ? (
           <div className="graphs">{this.getGraphs()}</div>
         ) : (
