@@ -40,7 +40,7 @@ class HistoryPage extends React.Component {
 
   handleRedirect = () => {
     const [data] = this.state.history.filter((search) => {
-      return search.id === parseInt(this.state.currentlySelected);
+      return search.history_id === parseInt(this.state.currentlySelected);
     });
     return (
       <Redirect

@@ -19,7 +19,6 @@ class HistoryTable extends React.Component {
   };
 
   render() {
-    // const isAdmin = this.props.history[0].username;
     return (
       <div className="history-table">
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -85,8 +84,8 @@ class HistoryTable extends React.Component {
                     <TableCell>
                       <Checkbox
                         color="primary"
-                        checked={this.props.selected === `${row.id}`}
-                        value={row.id}
+                        checked={this.props.selected === `${row.history_id}`}
+                        value={row.history_id}
                         onChange={this.handleChange}
                       />
                     </TableCell>
