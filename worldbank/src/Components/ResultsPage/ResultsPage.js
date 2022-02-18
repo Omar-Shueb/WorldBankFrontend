@@ -3,6 +3,9 @@ import React from "react";
 import BarGraph from "./BarGraph.js";
 import LineGraph from "./LineGraph.js";
 
+import { CircularProgress, ThemeProvider } from "@mui/material";
+import theme from "../Theme.js";
+
 import NavBar from "../NavBar/NavBar";
 
 import Networking from "../Networking";
@@ -77,8 +80,16 @@ class ResultsPage extends React.Component {
   render() {
     return (
       <div className="history-page">
-        <NavBar className="navbar" />
-        {this.state.data && <div className="graphs">{this.getGraphs()}</div>}
+        <NavBar className="navbar" checkLogin={this.checkLogin} />
+        {this.state.data ? (
+          <div className="graphs">{this.getGraphs()}</div>
+        ) : (
+          <ThemeProvider theme={theme}>
+            <div className="graphs" style={{ marginTop: "30vh" }}>
+              <CircularProgress size={100} />
+            </div>
+          </ThemeProvider>
+        )}
       </div>
     );
   }
