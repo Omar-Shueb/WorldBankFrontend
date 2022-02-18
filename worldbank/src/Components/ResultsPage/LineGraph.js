@@ -21,16 +21,7 @@ class LineGraph extends React.Component {
   };
 
   getLines = () => {
-    const colors = [
-      "#003f5c",
-      "#ffa600",
-      "#2f4b7c",
-      "#ff7c43",
-      "#665191",
-      "#a05195",
-      "#f95d6a",
-      `#d45087`,
-    ];
+    const colors = ["#FF5733", "#3344FF", "#00940C", "#F2D400"];
     const countries = this.getCountries();
     const lines = countries.map((country, i) => {
       return (

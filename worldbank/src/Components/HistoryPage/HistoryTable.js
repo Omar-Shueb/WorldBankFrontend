@@ -79,8 +79,8 @@ class HistoryTable extends React.Component {
                     <TableCell>
                       <Checkbox
                         color="primary"
-                        checked={this.props.selected === `${row.id}`}
-                        value={row.id}
+                        checked={this.props.selected === `${row.history_id}`}
+                        value={row.history_id}
                         onChange={this.handleChange}
                       />
                     </TableCell>
