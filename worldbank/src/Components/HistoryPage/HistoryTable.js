@@ -19,6 +19,7 @@ class HistoryTable extends React.Component {
   };
 
   render() {
+    // const isAdmin = this.props.history[0].username;
     return (
       <div className="history-table">
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -37,6 +38,11 @@ class HistoryTable extends React.Component {
                   <TableCell sx={{ fontWeight: "bold", fontSize: 14 }}>
                     Id
                   </TableCell>
+
+                  <TableCell sx={{ fontWeight: "bold", fontSize: 14 }}>
+                    {this.props.isAdmin ? "Username" : ""}
+                  </TableCell>
+
                   <TableCell
                     sx={{ fontWeight: "bold", fontSize: 14 }}
                     align="left"
@@ -85,6 +91,7 @@ class HistoryTable extends React.Component {
                       />
                     </TableCell>
                     <TableCell>{i + 1}</TableCell>
+                    <TableCell>{row.username ? row.username : ""}</TableCell>
                     <TableCell>{row.country_name}</TableCell>
                     <TableCell align="left">{row.indicator_name}</TableCell>
                     <TableCell align="left">
