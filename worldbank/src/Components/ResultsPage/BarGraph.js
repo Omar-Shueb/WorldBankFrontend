@@ -62,12 +62,12 @@ class BarGraph extends React.Component {
             data={mergedData}
             margin={{ top: 0, right: 20, bottom: 0, left: 20 }}
           >
+            <Tooltip />
             <Legend verticalAlign="bottom" height={36} />
             {this.getBars()}
             <CartesianGrid stroke="#ccc" />
             <XAxis dataKey="year" />
             <YAxis type="number" />
-            <Tooltip />
           </BarChart>
         </CardContent>
       </Card>
