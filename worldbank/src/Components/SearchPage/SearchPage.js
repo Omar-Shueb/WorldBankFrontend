@@ -236,7 +236,9 @@ class SearchPage extends React.Component {
                 country: this.state.country,
                 startYear: this.state.startYear,
                 endYear: this.state.endYear,
-                indicator: this.state.indicator,
+                indicator: this.state.indicator.length
+                  ? this.state.indicator
+                  : this.state.indicators.map((entry) => entry.value),
               },
             }}
           />
