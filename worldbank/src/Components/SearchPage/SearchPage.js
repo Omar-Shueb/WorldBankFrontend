@@ -67,10 +67,14 @@ class SearchPage extends React.Component {
             styles={{ margin: "100px" }}
             key={i}
             name={i}
+            captureMenuScroll={true}
+            backspaceRemovesValue={true}
+            isClearable={true}
+            isSearchable={true}
             onChange={(event, target) => {
               const dummyArray = this.state.indicator.map((x) => x);
-
-              dummyArray[target.name] = event.value;
+              const eventValue = event ? event.value : "";
+              dummyArray[target.name] = eventValue;
 
               this.setState({ indicator: dummyArray });
             }}
@@ -94,11 +98,14 @@ class SearchPage extends React.Component {
           }}
         >
           <IconButton
-            onClick={() =>
+            onClick={() => {
+              const indicatorArray = this.state.indicator;
+              indicatorArray.pop();
               this.setState({
+                indicator: indicatorArray,
                 indicatorDropdowns: this.state.indicatorDropdowns - 1,
-              })
-            }
+              });
+            }}
             disabled={this.state.indicatorDropdowns === 1}
           >
             <ExpandLessIcon />
@@ -127,10 +134,17 @@ class SearchPage extends React.Component {
             styles={{ margin: "100px" }}
             key={i}
             name={i}
+            captureMenuScroll={true}
+            backspaceRemovesValue={true}
+            isClearable={true}
+            isSearchable={true}
             onChange={(event, target) => {
-              const dummyArray = this.state.country.map((x) => x);
+              console.log(target);
 
-              dummyArray[target.name] = event.value;
+              const dummyArray = this.state.country.map((x) => x);
+              const eventValue = event ? event.value : "";
+
+              dummyArray[target.name] = eventValue;
 
               this.setState({ country: dummyArray });
             }}
@@ -166,11 +180,15 @@ class SearchPage extends React.Component {
           }}
         >
           <IconButton
-            onClick={() =>
+            onClick={() => {
+              const countryArray = this.state.country;
+              countryArray.pop();
+
               this.setState({
+                country: countryArray,
                 countryDropdowns: this.state.countryDropdowns - 1,
-              })
-            }
+              });
+            }}
             disabled={this.state.countryDropdowns === 1}
           >
             <ExpandLessIcon />
@@ -240,6 +258,7 @@ class SearchPage extends React.Component {
   };
 
   render() {
+    console.log(this.state.country);
     return (
       <div className="App">
         {this.state.commitSearch ? (
