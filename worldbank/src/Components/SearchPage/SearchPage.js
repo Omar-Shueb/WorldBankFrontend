@@ -43,8 +43,6 @@ class SearchPage extends React.Component {
 
     dummyArray[event.key] = event.value;
 
-    console.log(event);
-
     this.setState({ indicator: dummyArray });
   };
 
@@ -139,8 +137,6 @@ class SearchPage extends React.Component {
             isClearable={true}
             isSearchable={true}
             onChange={(event, target) => {
-              console.log(target);
-
               const dummyArray = this.state.country.map((x) => x);
               const eventValue = event ? event.value : "";
 
@@ -258,7 +254,6 @@ class SearchPage extends React.Component {
   };
 
   render() {
-    console.log(this.state.country);
     return (
       <div className="App">
         {this.state.commitSearch ? (
