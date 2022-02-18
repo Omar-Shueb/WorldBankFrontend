@@ -24,8 +24,8 @@ class App extends React.Component {
 
   componentDidMount() {
     this.checkLogin();
+    console.log("..");
   }
-
   checkLogin = async () => {
     const re = /sessionId=([\w-]+);?/;
     const cookies = await document.cookie;
